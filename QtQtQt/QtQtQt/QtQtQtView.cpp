@@ -50,7 +50,7 @@ BOOL CQtQtQtView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CQtQtQtView 그리기
 
-void CQtQtQtView::OnDraw(CDC* /*pDC*/)
+void CQtQtQtView::OnDraw(CDC* pDC)
 {
 	CQtQtQtDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -58,6 +58,7 @@ void CQtQtQtView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
+	pDC->TextOutW(100, 200, _T("QtQt ZZange!"));
 }
 
 
