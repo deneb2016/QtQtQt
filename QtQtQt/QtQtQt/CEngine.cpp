@@ -16,4 +16,19 @@ void CEngine::createTriangle(CPoint u, CPoint v, CPoint w, COLORREF brush, COLOR
 	objects.push_back(CTriangle(u, v, w, brush, pen));
 }
 
+void CEngine::deleteObjects(vector<CKey>& dels) 
+{
+	for (CKey k : dels)
+	{
+		objects.erase(k.getIter());
+	}
+	dels.clear();
+}
+
+void redrawAllObjects(CClientDC& dc, vector<list<CShape>::iterator>& selectedObjects)
+{
+	for(CSha)
+}
+
+
 
