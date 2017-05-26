@@ -33,11 +33,13 @@ private:
 
 public:
 	void createCircle(CPoint lu, CPoint ld, COLORREF brush, COLORREF pen);
-	void createRectangle(CPoint lu, CPoint rd, COLORREF brush, COLORREF pen);
+	void createRect(CPoint lu, CPoint rd, COLORREF brush, COLORREF pen);
 	void createTriangle(CPoint u, CPoint v, CPoint w, COLORREF brush, COLORREF pen);
 
 	void deleteObjects(vector<CKey>& dels);
 	void redrawAllObjects(CClientDC& dc, vector<list<CShape*>::iterator>& selectedObjects); //: 모든 오브젝트에 대해 redraw호출
 	CKey find(CPoint pos); //pos에 있는 오브젝트를 찾아서 키값 리턴
 	void moveObjects(vector<CKey>& objects, CPoint moveVector);// : objects들 이동
+
+
 };

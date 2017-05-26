@@ -1,0 +1,19 @@
+diff a/QtQtQt/QtQtQt/CEngine.h b/QtQtQt/QtQtQt/CEngine.h	(rejected hunks)
+@@ -33,13 +33,11 @@
+ 
+ public:
+ 	void createCircle(CPoint lu, CPoint ld, COLORREF brush, COLORREF pen);
+-	void createRect(CPoint lu, CPoint rd, COLORREF brush, COLORREF pen);
++	void createRectangle(CPoint lu, CPoint rd, COLORREF brush, COLORREF pen);
+ 	void createTriangle(CPoint u, CPoint v, CPoint w, COLORREF brush, COLORREF pen);
+ 
+ 	void deleteObjects(vector<CKey>& dels);
+ 	void redrawAllObjects(CClientDC& dc, vector<list<CShape>::iterator>& selectedObjects); //: ��� ������Ʈ�� ���� redrawȣ��
+-	CKey find(CPoint pos) //pos�� �ִ� ������Ʈ�� ã�Ƽ� Ű�� ����
+-	void moveObjects(vector<CKey>& objects, CPoint moveVector)// : objects�� �̵�
+-
+-
++	CKey find(CPoint pos); //pos�� �ִ� ������Ʈ�� ã�Ƽ� Ű�� ����
++	void moveObjects(vector<CKey>& objects, CPoint moveVector);// : objects�� �̵�
+ };
+\ No newline at end of file

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CEngine.h"
+<<<<<<< HEAD
 
 void CEngine::createCircle(CPoint lu, CPoint ld, COLORREF brush, COLORREF pen)
 {
@@ -32,3 +33,5 @@ void redrawAllObjects(CClientDC& dc, vector<list<CShape>::iterator>& selectedObj
 
 
 
+=======
+>>>>>>> 75a4fdef8ddddf63262c2ef9631d668489d4d796
