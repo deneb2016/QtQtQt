@@ -17,6 +17,7 @@ public:
 	bool edgeCheck(CPoint pos) ; // 가장자리 부근에 있는지 체크
 	
 	static double calcDistance(CPoint p1, CPoint p2); // 두 점 사이의 거리
+	static int calcCrossProductZ(CPoint p1, CPoint p2); //두점의 cross product 값
 };
 
 class CCircle : public CShape {
@@ -46,7 +47,6 @@ public:
 class CTriangle : public CShape {
 private:
 	CPoint m_p1, m_p2, m_p3;
-	CPoint m_center;
 public:
 	CTriangle(CPoint p1, CPoint p2, CPoint p3, COLORREF bc, COLORREF pc);
 	bool select(CPoint pos);

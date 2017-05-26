@@ -35,6 +35,9 @@ void CShape::setPenColor(COLORREF color) {
 	m_penColor = color;
 }
 
+int CShape::calcCrossProductZ(CPoint p1, CPoint p2) {
+	return p1.x * p2.y - p1.y * p2.x;
+}
 
 double CShape::calcDistance(CPoint p1, CPoint p2) {
 	double ret = sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
@@ -89,7 +92,10 @@ CTriangle::CTriangle(CPoint p1, CPoint p2, CPoint p3, COLORREF bc, COLORREF pc){
 	m_brushColor = bc;
 	m_penColor = pc;
 
-	
+	m_leftup.x = (p3.x < ((p1.x < p2.x) ? p1.x : p2.x)) ? p3.x : ((p1.x < p2.x) ? p1.x : p2.x); //제일 작은 x값
+	m_rightdown.x = (p3.x > ((p1.x > p2.x) ? p1.x : p2.x)) ? p3.x : ((p1.x > p2.x) ? p1.x : p2.x); //제일 큰 x값
+	m_rightdown.y = (p3.y < ((p1.y < p2.y) ? p1.y : p2.y)) ? p3.y : ((p1.y < p2.y) ? p1.y : p2.y); //제일 작은 y값
+	m_leftup.y = (p3.y >((p1.y > p2.y) ? p1.y : p2.y)) ? p3.y : ((p1.y > p2.y) ? p1.y : p2.y); //제일 큰 y값
 };
 
 bool CCircle::select(CPoint pos) {
@@ -110,7 +116,15 @@ bool CRectangle::select(CPoint pos) {
 	else return 0;
 };
 bool CTriangle::select(CPoint pos) {
-	return 0;
+	CPoint e1, e2, e3;
+	e1 = m_p2 - m_p1;
+	e2 = m_p3 - m_p2;
+	e3 = m_p1 - m_p3;
+
+	if (calcCrossProductZ(e1, pos) >= 0 && calcCrossProductZ(e2, pos) >= 0 && calcCrossProductZ(e3, pos) >= 0) {
+		return 1;
+	}
+	else return 0;
 }
 
 void CCircle::move(CPoint vec) {
@@ -124,7 +138,13 @@ void CRectangle::move(CPoint vec) {
 	m_leftup += vec;
 	m_rightdown += vec;
 };
-void CTriangle::move(CPoint vec) {};
+void CTriangle::move(CPoint vec) {
+	m_leftup += vec;
+	m_rightdown += vec;
+	m_p1 += vec;
+	m_p2 += vec;
+	m_p3 += vec;
+};
 
 void CCircle::redraw(CClientDC & dc, bool selected) {
 	if (selected == false) return;
@@ -144,4 +164,14 @@ void CRectangle::redraw(CClientDC & dc, bool selected) {
 
 	dc.Rectangle(m_leftup.x, m_rightdown.y, m_rightdown.x, m_leftup.y);
 };
-void CTriangle::redraw(CClientDC & dc, bool selected) {};
+
+void CTriangle::redraw(CClientDC & dc, bool selected) {
+	if (selected == false) return;
+	CPen MyPen(PS_SOLID, 0, m_penColor);
+	CBrush MyBrush(m_brushColor);
+	dc.SelectObject(&MyPen);
+	dc.SelectObject(&MyBrush);
+
+	CPoint pArr[3] = { m_p1, m_p2, m_p3 };
+	dc.Polygon(pArr,3);
+};
