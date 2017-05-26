@@ -83,6 +83,13 @@ CRectangle::CRectangle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc) {
 	m_penColor = pc;
 };
 CTriangle::CTriangle(CPoint p1, CPoint p2, CPoint p3, COLORREF bc, COLORREF pc){
+	m_p1 = p1;
+	m_p2 = p2;
+	m_p3 = p3;
+	m_brushColor = bc;
+	m_penColor = pc;
+
+	
 };
 
 bool CCircle::select(CPoint pos) {
@@ -106,10 +113,35 @@ bool CTriangle::select(CPoint pos) {
 	return 0;
 }
 
-void CCircle::move(CPoint vec) {};
-void CRectangle::move(CPoint vec) {};
+void CCircle::move(CPoint vec) {
+	m_leftup += vec;
+	m_rightdown += vec;
+	m_center += vec; //타원의 중심
+	m_c1 += vec;
+	m_c2 += vec; //두 정점
+};
+void CRectangle::move(CPoint vec) {
+	m_leftup += vec;
+	m_rightdown += vec;
+};
 void CTriangle::move(CPoint vec) {};
 
-void CCircle::redraw(CClientDC & dc, bool selected) {};
-void CRectangle::redraw(CClientDC & dc, bool selected) {};
+void CCircle::redraw(CClientDC & dc, bool selected) {
+	if (selected == false) return;
+	CPen MyPen(PS_SOLID, 0, m_penColor);
+	CBrush MyBrush(m_brushColor);
+	dc.SelectObject(&MyPen);
+	dc.SelectObject(&MyBrush);
+
+	dc.Ellipse(m_leftup.x, m_rightdown.y, m_rightdown.x, m_leftup.y);
+};
+void CRectangle::redraw(CClientDC & dc, bool selected) {
+	if (selected == false) return;
+	CPen MyPen(PS_SOLID, 0, m_penColor);
+	CBrush MyBrush(m_brushColor);
+	dc.SelectObject(&MyPen);
+	dc.SelectObject(&MyBrush);
+
+	dc.Rectangle(m_leftup.x, m_rightdown.y, m_rightdown.x, m_leftup.y);
+};
 void CTriangle::redraw(CClientDC & dc, bool selected) {};

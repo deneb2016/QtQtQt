@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CEngine.h"
-<<<<<<< HEAD
 
 void CEngine::createCircle(CPoint lu, CPoint ld, COLORREF brush, COLORREF pen)
 {

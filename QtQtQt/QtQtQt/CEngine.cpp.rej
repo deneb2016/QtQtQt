@@ -1,0 +1,8 @@
+diff a/QtQtQt/QtQtQt/CEngine.cpp b/QtQtQt/QtQtQt/CEngine.cpp	(rejected hunks)
+@@ -1,5 +1,6 @@
+ #include "stdafx.h"
+ #include "CEngine.h"
++<<<<<<< HEAD
+ 
+ void CEngine::createCircle(CPoint lu, CPoint ld, COLORREF brush, COLORREF pen)
+ {
