@@ -38,8 +38,8 @@ public:
 
 	void deleteObjects(vector<CKey>& dels);
 	void redrawAllObjects(CClientDC& dc, vector<list<CShape>::iterator>& selectedObjects); //: 모든 오브젝트에 대해 redraw호출
-	CKey find(CPoint pos) //pos에 있는 오브젝트를 찾아서 키값 리턴
-	void moveObjects(vector<CKey>& objects, CPoint moveVector)// : objects들 이동
+	CKey find(CPoint pos); //pos에 있는 오브젝트를 찾아서 키값 리턴
+	void moveObjects(vector<CKey>& objects, CPoint moveVector);// : objects들 이동
 
 
 };
