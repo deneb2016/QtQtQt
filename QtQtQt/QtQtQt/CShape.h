@@ -1,5 +1,6 @@
 #pragma once
 
+
 class CShape {
 private:
 	CPoint m_leftup, m_rightdown; 
@@ -15,10 +16,18 @@ public:
 	void setPenColor(COLORREF color) ; // 테두리색 바꾸기
 	virtual void redraw(CClientDC & dc, bool selected) ; // 자기자신 그리기, selected이면 강조
 	bool edgeCheck(CPoint pos) ; // 가장자리 부근에 있는지 체크
+	
+	static double calcDistance(CPoint p1, CPoint p2); // 두 점 사이의 거리
 };
 
 class CCircle : public CShape {
 private:
+	int m_a; //x축방향 반지름
+	int m_b; //y축방향 반지름
+	int m_c; //중심으로부터 두 정점까지의 거리
+	bool m_dir; //타원의 방향, true:x축방향이 더 긴 타원 false: y축방향이 더 긴 타원
+	CPoint m_center; //타원의 중심
+	CPoint m_c1, m_c2; //두 정점
 public:
 	CCircle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc);
 };
