@@ -45,6 +45,8 @@ public:
 
 class CTriangle : public CShape {
 private:
+	CPoint m_p1, m_p2, m_p3;
+	CPoint m_center;
 public:
 	CTriangle(CPoint p1, CPoint p2, CPoint p3, COLORREF bc, COLORREF pc);
 	bool select(CPoint pos);
