@@ -4,12 +4,21 @@
 #include "CShape.h"
 #include <math.h>
 /*CShape*/
-CShape::CShape() {};
-CShape::CShape(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc) : m_leftup(lu), m_rightdown(rd), m_brushColor(bc), m_penColor(pc) {}
 
+bool CShape::select(CPoint position)
+{
+	return false;
+}
 
+void CShape::move(CPoint vec)
+{
+}
 
-void CShape::setLeftUp(CPoint pos){ 
+void CShape::redraw(CClientDC & dc, bool selected)
+{
+}
+
+void CShape::setLeftUp(CPoint pos){
 	if (pos.x >= m_rightdown.x || pos.y <= m_rightdown.y) return; //유효하지 않은 경우 그냥 리턴
 
 	m_leftup = pos;
@@ -43,14 +52,18 @@ bool CShape::edgeCheck(CPoint pos) {
 }
 
 
+CCircle::CCircle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc){
+	m_leftup = lu;
+	m_rightdown = rd;
+	m_brushColor = bc;
+	m_penColor = pc;
 
-CCircle::CCircle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc) :CShape(lu, rd, bc, pc) {
 	m_a = (m_rightdown.x- m_leftup.x) / 2; //x축방향 반지름
 	m_b = (m_leftup.y - m_rightdown.y) / 2; //y축방향 반지름
 	m_center = CPoint((m_leftup.x + m_rightdown.x) / 2, (m_leftup.y + m_rightdown.y) / 2); //중심으로부터 두 정점까지의 거리
 	
 	//c^2 = a^2 - b^2;
-	m_c = sqrt((m_leftup.y - m_rightdown.y) / 2) * ((m_leftup.y - m_rightdown.y) / 2) - ((m_rightdown.x - m_leftup.x) / 2) *((m_rightdown.x - m_leftup.x) / 2);
+	m_c = (int)sqrt((m_leftup.y - m_rightdown.y) / 2) * ((m_leftup.y - m_rightdown.y) / 2) - ((m_rightdown.x - m_leftup.x) / 2) *((m_rightdown.x - m_leftup.x) / 2);
 	m_dir = (m_a >= m_b) ? true : false; //타원의 방향, true:x축방향이 더 긴 타원 false: y축방향이 더 긴 타원
 	
 	if (m_dir == true) {//타원의 방향이 x축이 더 긴
@@ -63,7 +76,12 @@ CCircle::CCircle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc) :CShape(lu, rd,
 	}
 	return;
 };
-CRectangle::CRectangle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc) :CShape(lu, rd, bc, pc) {};
+CRectangle::CRectangle(CPoint lu, CPoint rd, COLORREF bc, COLORREF pc) {
+	m_leftup = lu;
+	m_rightdown = rd;
+	m_brushColor = bc;
+	m_penColor = pc;
+};
 CTriangle::CTriangle(CPoint p1, CPoint p2, CPoint p3, COLORREF bc, COLORREF pc){
 };
 
