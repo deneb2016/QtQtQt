@@ -37,6 +37,7 @@ CKey CEngine::find(CPoint pos)
 {
 	CKey ret;
 	for (auto iter = objects.rbegin(); iter != objects.rend(); ++iter) {
+		CShape obj = *iter;
 		if (obj->select()) {
 			ret.setIter(iter);
 			break;
