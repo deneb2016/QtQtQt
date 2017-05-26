@@ -33,5 +33,22 @@ void CEngine::redrawAllObjects(CClientDC& dc, vector<CKey>& selectedObjects)
 	}
 }
 
+CKey CEngine::find(CPoint pos) 
+{
+	CKey ret;
+	for (auto iter = objects.rbegin(); iter != objects.rend(); ++iter) {
+		if (obj->select()) {
+			ret.setIter(iter);
+			break;
+		}
+	}
+	return ret;
+}
 
 
+void CEngine::moveObjects(vector<CKey>& objects, CPoint moveVector) 
+{
+	for (CKey k : objects) {
+		k.getIter()->move(moveVector);
+	}
+}
