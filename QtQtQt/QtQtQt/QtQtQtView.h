@@ -3,6 +3,8 @@
 //
 
 #pragma once
+#include "atltypes.h"
+#include "CEngine.h"
 
 
 class CQtQtQtView : public CView
@@ -40,6 +42,19 @@ protected:
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnDrawTri();
+	int m_flag;
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	CPoint m_sPt;
+	CPoint m_ePt;
+	afx_msg void OnDrawRect();
+	afx_msg void OnDrawCircle();
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	CEngine* m_Engine;
+	vector<CKey> selected_shape;
 };
 
 #ifndef _DEBUG  // QtQtQtView.cpp의 디버그 버전
