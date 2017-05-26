@@ -26,11 +26,10 @@ void CEngine::deleteObjects(vector<CKey>& dels)
 	dels.clear();
 }
 
-void redrawAllObjects(CClientDC& dc, vector<CKey>& selectedObjects)
+void CEngine::redrawAllObjects(CClientDC& dc, vector<CKey>& selectedObjects)
 {
 	for (CShape* obj : objects) {
-		bool flag = false;
-		for(CShape* sel : select)
+		obj->redraw(dc, false);
 	}
 }
 
