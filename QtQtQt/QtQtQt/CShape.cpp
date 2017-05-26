@@ -147,7 +147,6 @@ void CTriangle::move(CPoint vec) {
 };
 
 void CCircle::redraw(CClientDC & dc, bool selected) {
-	if (selected == false) return;
 	CPen MyPen(PS_SOLID, 0, m_penColor);
 	CBrush MyBrush(m_brushColor);
 	dc.SelectObject(&MyPen);
@@ -156,7 +155,6 @@ void CCircle::redraw(CClientDC & dc, bool selected) {
 	dc.Ellipse(m_leftup.x, m_rightdown.y, m_rightdown.x, m_leftup.y);
 };
 void CRectangle::redraw(CClientDC & dc, bool selected) {
-	if (selected == false) return;
 	CPen MyPen(PS_SOLID, 0, m_penColor);
 	CBrush MyBrush(m_brushColor);
 	dc.SelectObject(&MyPen);
@@ -166,7 +164,6 @@ void CRectangle::redraw(CClientDC & dc, bool selected) {
 };
 
 void CTriangle::redraw(CClientDC & dc, bool selected) {
-	if (selected == false) return;
 	CPen MyPen(PS_SOLID, 0, m_penColor);
 	CBrush MyBrush(m_brushColor);
 	dc.SelectObject(&MyPen);
